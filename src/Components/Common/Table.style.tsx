@@ -27,6 +27,11 @@ export const InputS = styled.input`
     margin: 0px;
     animation: ${rotate} 0.1s;
   }
+
+  @media (max-width: 768px) {
+    height: 40px;
+    width: 35px;
+  }
 `;
 
 export const DivContainerS = styled.div`

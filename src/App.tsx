@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const cols = [0, 1, 2, 3, 4];
 
   // State to store the word to be guessed
-  const [wordToFind, setWordToFind] = useState("");
+  const [wordToFind, setWordToFind] = useState("Apple");
   // State to track the current row and column
   const [rowState, setRowState] = useState(0);
   const [colState, setColState] = useState(0);
@@ -44,9 +44,10 @@ const App: React.FC = () => {
 
   // Function to restart the game
   const handleClose = () => {
-    setWin(false);
+    /*setWin(false);
     setLost(false);
-    window.location.reload(); // Refresh the page to reset the game
+    window.location.reload();*/
+    // Refresh the page to reset the game
   };
 
   // Function to handle user input changes
@@ -72,17 +73,19 @@ const App: React.FC = () => {
     }
 
     // Check if the letter is in the correct position
+
     if (
-      ref.current[rowIndex][colIndex].value.toUpperCase() ===
-      wordToFind.toUpperCase().split(" ")[colIndex]
+      ref.current[rowIndex][colIndex].value.toUpperCase() ==
+      wordToFind.toUpperCase().split("")[colIndex]
     ) {
       ref.current[rowIndex][colIndex].style.backgroundColor = "green";
+      console.log(ref.current[rowIndex][colIndex].style.backgroundColor);
     }
     // Check if the letter exists in the word but in the wrong position
     else if (
       wordToFind
         .toUpperCase()
-        .split(" ")
+        .split("")
         .includes(ref.current[rowIndex][colIndex].value.toUpperCase())
     ) {
       ref.current[rowIndex][colIndex].style.backgroundColor = "yellow";
@@ -91,7 +94,7 @@ const App: React.FC = () => {
     // Handle incorrect multiple appearances
     const ApparitionsWordToFind = wordToFind
       .toUpperCase()
-      .split(" ")
+      .split("")
       .filter(
         (letter) =>
           letter === ref.current[rowIndex][colIndex].value.toUpperCase()
@@ -111,7 +114,7 @@ const App: React.FC = () => {
     // Handle losing case
     if (
       rowIndex === rows.length - 1 &&
-      wordToFind.toUpperCase().split(" ")[colIndex] !==
+      wordToFind.toUpperCase().split("")[colIndex] !==
         ref.current[rowIndex][colIndex].value.toUpperCase()
     ) {
       setWin(false);
