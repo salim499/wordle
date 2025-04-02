@@ -15,6 +15,8 @@ const App: React.FC = () => {
 
   // State to store the word to be guessed
   const [wordToFind, setWordToFind] = useState("Apple");
+  // words list
+  const [wordsList, setWordsList] = useState<string[]>([]);
   // State to track the current row and column
   const [rowState, setRowState] = useState(0);
   const [colState, setColState] = useState(0);
@@ -29,6 +31,7 @@ const App: React.FC = () => {
     // Select a random word from the dataset
     const index = Math.floor(Data.words.length * Math.random());
     setWordToFind(Data.words[index]);
+    setWordsList(Data.words);
 
     // Disable all input fields initially
     ref.current.forEach((row) => {
@@ -44,51 +47,41 @@ const App: React.FC = () => {
 
   // Function to restart the game
   const handleClose = () => {
-    /*setWin(false);
+    setWin(false);
     setLost(false);
-    window.location.reload();*/
+    window.location.reload();
     // Refresh the page to reset the game
   };
 
   // Function to handle user input changes
   const handleChange = (rowIndex: number, colIndex: number, val?: string) => {
+    // Input validation
     ref.current[rowIndex][colIndex].style.animation = "rotate(360)";
     ref.current[rowIndex][colIndex].disabled = true;
     if (val) ref.current[rowIndex][colIndex].value = val;
 
-    // Move to the next input field
-    let nextCol: HTMLInputElement | null = null;
-    if (ref.current[rowIndex][colIndex + 1]) {
-      nextCol = ref.current[rowIndex][colIndex + 1];
-      setRowState(rowIndex);
-      setColState(colIndex + 1);
-    } else if (ref.current[rowIndex + 1]) {
-      nextCol = ref.current[rowIndex + 1][0];
-      setRowState(rowIndex + 1);
-      setColState(0);
-    }
-    if (nextCol) {
-      nextCol.disabled = false;
-      nextCol.focus();
-    }
-
-    // Check if the letter is in the correct position
-
+    // Handle losing case
     if (
-      ref.current[rowIndex][colIndex].value.toUpperCase() ==
-      wordToFind.toUpperCase().split("")[colIndex]
+      rowIndex === rows.length - 1 &&
+      wordToFind.toUpperCase().split("")[colIndex] !==
+        ref.current[rowIndex][colIndex].value.toUpperCase()
     ) {
-      ref.current[rowIndex][colIndex].style.backgroundColor = "green";
-      console.log(ref.current[rowIndex][colIndex].style.backgroundColor);
+      setWin(false);
+      setLost(true);
+      return;
     }
-    // Check if the letter exists in the word but in the wrong position
+
+    // Handle winning case
     else if (
-      wordToFind
+      wordToFind.toUpperCase() ===
+      ref.current[rowIndex]
+        .map((el) => el.value)
+        .join(" ")
         .toUpperCase()
-        .split("")
-        .includes(ref.current[rowIndex][colIndex].value.toUpperCase())
     ) {
-      ref.current[rowIndex][colIndex].style.backgroundColor = "yellow";
+      setWin(true);
+      setLost(false);
+      return;
     }
 
     // Handle incorrect multiple appearances
@@ -104,33 +97,55 @@ const App: React.FC = () => {
         col.value.toUpperCase() ===
         ref.current[rowIndex][colIndex].value.toUpperCase()
     );
-    if (ApparitionsInput.length > ApparitionsWordToFind.length) {
-      const e = ApparitionsInput.filter(
-        (col) => col.style.backgroundColor === "yellow"
-      );
-      if (e.length > 0) e[e.length - 1].style.backgroundColor = "gray";
-    }
 
-    // Handle losing case
+    // Check if the letter is in the correct position
     if (
-      rowIndex === rows.length - 1 &&
-      wordToFind.toUpperCase().split("")[colIndex] !==
-        ref.current[rowIndex][colIndex].value.toUpperCase()
+      ref.current[rowIndex][colIndex].value.toUpperCase() ==
+      wordToFind.toUpperCase().split("")[colIndex]
     ) {
-      setWin(false);
-      setLost(true);
+      ref.current[rowIndex][colIndex].style.backgroundColor = "green";
+      if (ApparitionsInput.length > ApparitionsWordToFind.length) {
+        const e = ApparitionsInput.filter(
+          (col) => col.style.backgroundColor === "yellow"
+        );
+        if (e.length > 0) {
+          e[0].style.backgroundColor = "gray";
+        }
+      }
     }
 
-    // Handle winning case
+    // Check if the letter exists in the word but in the wrong position
     else if (
-      wordToFind.toUpperCase() ===
-      ref.current[rowIndex]
-        .map((el) => el.value)
-        .join(" ")
+      wordToFind
         .toUpperCase()
+        .split("")
+        .includes(ref.current[rowIndex][colIndex].value.toUpperCase())
     ) {
-      setWin(true);
-      setLost(false);
+      ref.current[rowIndex][colIndex].style.backgroundColor = "yellow";
+      if (ApparitionsInput.length > ApparitionsWordToFind.length) {
+        const e = ApparitionsInput.filter(
+          (col) => col.style.backgroundColor === "yellow"
+        );
+        if (e.length > 0) {
+          e[e.length - 1].style.backgroundColor = "gray";
+        }
+      }
+    }
+
+    // Move to the next input field
+    let nextCol: HTMLInputElement | null = null;
+    if (ref.current[rowIndex][colIndex + 1]) {
+      nextCol = ref.current[rowIndex][colIndex + 1];
+      setRowState(rowIndex);
+      setColState(colIndex + 1);
+    } else if (ref.current[rowIndex + 1]) {
+      nextCol = ref.current[rowIndex + 1][0];
+      setRowState(rowIndex + 1);
+      setColState(0);
+    }
+    if (nextCol) {
+      nextCol.disabled = false;
+      nextCol.focus();
     }
   };
 
