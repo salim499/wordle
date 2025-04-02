@@ -47,10 +47,11 @@ const App: React.FC = () => {
 
   // Function to restart the game
   const handleClose = () => {
+    // Close Modal
     setWin(false);
     setLost(false);
-    window.location.reload();
     // Refresh the page to reset the game
+    window.location.reload();
   };
 
   // Function to handle user input changes
@@ -76,7 +77,7 @@ const App: React.FC = () => {
       wordToFind.toUpperCase() ===
       ref.current[rowIndex]
         .map((el) => el.value)
-        .join(" ")
+        .join("")
         .toUpperCase()
     ) {
       setWin(true);
