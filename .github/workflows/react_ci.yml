@@ -15,8 +15,5 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Installer les dépendances
-        run: npm install
-
       - name: Lancer le build (qui va échouer)
         run: npm run build
