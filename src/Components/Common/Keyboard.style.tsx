@@ -23,6 +23,15 @@ const InputS = styled.input`
   @media (max-width: 768px) {
     height: 40px;
     width: 35px;
+
+    &:hover {
+      background-color: white;
+      color: lightGray;
+      height: 40px;
+      width: 40px;
+      margin: 0px;
+      cursor: pointer;
+    }
   }
 `;
 
