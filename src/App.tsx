@@ -99,7 +99,7 @@ const App: React.FC = () => {
 
     // Check if the letter is in the correct position
     if (
-      ref.current[rowIndex][colIndex].value.toUpperCase() ==
+      ref.current[rowIndex][colIndex].value.toUpperCase() ===
       wordToFind.toUpperCase().split("")[colIndex]
     ) {
       ref.current[rowIndex][colIndex].style.backgroundColor = "green";
