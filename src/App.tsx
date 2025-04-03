@@ -15,8 +15,7 @@ const App: React.FC = () => {
 
   // State to store the word to be guessed
   const [wordToFind, setWordToFind] = useState("Apple");
-  // words list
-  const [wordsList, setWordsList] = useState<string[]>([]);
+
   // State to track the current row and column
   const [rowState, setRowState] = useState(0);
   const [colState, setColState] = useState(0);
@@ -31,7 +30,6 @@ const App: React.FC = () => {
     // Select a random word from the dataset
     const index = Math.floor(Data.words.length * Math.random());
     setWordToFind(Data.words[index]);
-    setWordsList(Data.words);
 
     // Disable all input fields initially
     ref.current.forEach((row) => {
