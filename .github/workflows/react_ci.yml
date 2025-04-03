@@ -1,17 +1,22 @@
-name: Test React Ci
+name: Test React CI
 
 on: [push]
 
 jobs:
-  buildingJob:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Recupérer le code
+      - name: Récupérer le code du dépôt
         uses: actions/checkout@v3
 
-      - name: Install Dependecies
+      - name: Installer Node.js
         uses: actions/setup-node@v3
+        with:
+          node-version: "18"
 
-      - name: Lancer le build
-        uses: npm run build
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Lancer le build (qui va échouer)
+        run: npm run build
