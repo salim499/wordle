@@ -40,12 +40,12 @@ const Keyboard = (props: KeyboardT) => {
       ].map((val, index) => (
         <KeyboardS
           key={index}
-          value={val}
-          readOnly={true}
           onClick={() =>
             props.handleChange(props.rowState, props.colState, val)
           }
-        />
+        >
+          {val}
+        </KeyboardS>
       ))}
     </>
   );

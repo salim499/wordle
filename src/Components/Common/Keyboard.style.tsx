@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const InputS = styled.input`
+const InputS = styled.button`
   background-color: lightGray;
   color: white;
   height: 55px;
