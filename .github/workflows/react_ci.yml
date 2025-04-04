@@ -1,20 +1,22 @@
-name: Test my app
+name: test
 
 on: [push]
 
 jobs:
-  first-job:
+  first_job:
     runs-on: ubuntu-latest
-
     steps:
-      - name: getting the code
+      - name: first step
         uses: actions/checkout@v3
 
-      - name: install node js
-        uses: actions/setup-node@v3
+      - name: second step
+        run: actions/node/v3
 
-      - name: install dependencies
+      - name: third step
         run: npm install
 
-      - name: Lancer le build
+      - name: fourth step
+        run: npm test
+
+      - name: fifth step
         run: npm run build
