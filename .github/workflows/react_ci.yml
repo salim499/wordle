@@ -16,5 +16,5 @@ jobs:
       - name: install dependencies
         uses: npm install
 
-      - name: deploy
-        uses: npm deploy
+      - name: Lancer le build
+        run: npm run build
