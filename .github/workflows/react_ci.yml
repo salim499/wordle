@@ -1,22 +1,20 @@
-name: Test React CI
+name: Test my app
 
 on: [push]
 
 jobs:
-  build:
+  first-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Récupérer le code du dépôt
+      - name: getting the code
         uses: actions/checkout@v3
 
-      - name: Installer Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
+      - name: install node js
+        uses: action/setup-node@v3
 
-      - name: Installer les dépendances
-        run: npm install
+      - name: install dependencies
+        uses: npm install
 
-      - name: Lancer le build (qui va échouer)
-        run: npm run build
+      - name: deploy
+        uses: npm deploy

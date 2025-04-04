@@ -59,30 +59,6 @@ const App: React.FC = () => {
     ref.current[rowIndex][colIndex].disabled = true;
     if (val) ref.current[rowIndex][colIndex].value = val;
 
-    // Handle losing case
-    if (
-      rowIndex === rows.length - 1 &&
-      wordToFind.toUpperCase().split("")[colIndex] !==
-        ref.current[rowIndex][colIndex].value.toUpperCase()
-    ) {
-      setWin(false);
-      setLost(true);
-      return;
-    }
-
-    // Handle winning case
-    else if (
-      wordToFind.toUpperCase() ===
-      ref.current[rowIndex]
-        .map((el) => el.value)
-        .join("")
-        .toUpperCase()
-    ) {
-      setWin(true);
-      setLost(false);
-      return;
-    }
-
     // Handle incorrect multiple appearances
     const ApparitionsWordToFind = wordToFind
       .toUpperCase()
@@ -145,6 +121,30 @@ const App: React.FC = () => {
     if (nextCol) {
       nextCol.disabled = false;
       nextCol.focus();
+    }
+
+    // Handle losing case
+    if (
+      rowIndex === rows.length - 1 &&
+      wordToFind.toUpperCase().split("")[colIndex] !==
+        ref.current[rowIndex][colIndex].value.toUpperCase()
+    ) {
+      setWin(false);
+      setLost(true);
+      return;
+    }
+
+    // Handle winning case
+    else if (
+      wordToFind.toUpperCase() ===
+      ref.current[rowIndex]
+        .map((el) => el.value)
+        .join("")
+        .toUpperCase()
+    ) {
+      setWin(true);
+      setLost(false);
+      return;
     }
   };
 
