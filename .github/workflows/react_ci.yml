@@ -14,7 +14,7 @@ jobs:
         uses: action/setup-node@v3
 
       - name: install dependencies
-        uses: npm install
+        run: npm install
 
       - name: Lancer le build
         run: npm run build
