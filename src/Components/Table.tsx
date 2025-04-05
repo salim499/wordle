@@ -15,7 +15,7 @@ function Table(props: TableT) {
             <InputS
               key={rowIndex + colIndex}
               type="text"
-              readOnly={true}
+              readOnly={false}
               maxLength={1}
               ref={(el) => {
                 if (el) {
@@ -26,7 +26,7 @@ function Table(props: TableT) {
                   props.ref.current[rowIndex][colIndex] = el; // Assignation de la référence à la bonne case
                 }
               }}
-              //onChange={() => props.handleChange(rowIndex, colIndex)}
+              onChange={() => props.handleChange(rowIndex, colIndex)}
             />
           ))}
         </DivContainerS>

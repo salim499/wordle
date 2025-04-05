@@ -9,7 +9,11 @@ import Data from "./data.json";
 
 import { DivContainerS, DivKeyBoardS, DivTable } from "./Common/App.style";
 
-const App: React.FC = () => {
+type AppPropsT = {
+  word?: string;
+};
+
+const App = (props: AppPropsT) => {
   const rows = [0, 1, 2, 3, 4];
   const cols = [0, 1, 2, 3, 4];
 
@@ -29,7 +33,7 @@ const App: React.FC = () => {
   useEffect(() => {
     // Select a random word from the dataset
     const index = Math.floor(Data.words.length * Math.random());
-    setWordToFind(Data.words[index]);
+    setWordToFind(props.word || Data.words[index]);
 
     // Disable all input fields initially
     ref.current.forEach((row) => {
@@ -150,9 +154,7 @@ const App: React.FC = () => {
 
   return (
     <DivContainerS>
-      {win || lost ? (
-        <Modal win={win} lost={lost} handleClose={handleClose} />
-      ) : null}
+      <Modal win={win} lost={lost} handleClose={handleClose} />
       <Header />
       <DivTable>
         <Table ref={ref} rows={rows} cols={cols} handleChange={handleChange} />

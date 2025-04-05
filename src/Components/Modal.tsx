@@ -14,18 +14,20 @@ type ModalPropsT = {
 };
 
 const Modal = (props: ModalPropsT) => {
-  return createPortal(
-    <ModalContainerS>
-      <ModalContentS>
-        <TitleS win={props.win}>
-          {props.win === true ? "Congratulations" : ""}
-          {props.lost === true ? "Sorry, Try Again !" : ""}
-        </TitleS>
-        <ButtonS onClick={props.handleClose}>Play again</ButtonS>
-      </ModalContentS>
-    </ModalContainerS>,
-    document.getElementById("modal") as HTMLElement
-  );
+  return props.win || props.lost
+    ? createPortal(
+        <ModalContainerS>
+          <ModalContentS>
+            <TitleS win={props.win}>
+              {props.win === true ? "Congratulations" : ""}
+              {props.lost === true ? "Sorry, Try Again !" : ""}
+            </TitleS>
+            <ButtonS onClick={props.handleClose}>Play again</ButtonS>
+          </ModalContentS>
+        </ModalContainerS>,
+        document.getElementById("modal") as HTMLElement
+      )
+    : null;
 };
 
 export default Modal;
