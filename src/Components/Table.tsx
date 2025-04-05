@@ -13,7 +13,7 @@ function Table(props: TableT) {
         <DivContainerS key={rowIndex}>
           {props.cols.map((colIndex) => (
             <InputS
-              key={colIndex}
+              key={rowIndex + colIndex}
               type="text"
               readOnly={true}
               maxLength={1}

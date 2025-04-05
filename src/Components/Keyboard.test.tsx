@@ -41,7 +41,7 @@ test("rendering all letters of alphabet", () => {
   ]);
 });
 
-test("function called", async () => {
+test("function called with good attributes", async () => {
   const functionToVerify = jest.fn();
   render(
     <Keyboard rowState={0} colState={0} handleChange={functionToVerify} />

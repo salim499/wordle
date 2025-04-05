@@ -155,7 +155,7 @@ const App: React.FC = () => {
       ) : null}
       <Header />
       <DivTable>
-        <Table rows={rows} cols={cols} ref={ref} handleChange={handleChange} />
+        <Table ref={ref} rows={rows} cols={cols} handleChange={handleChange} />
       </DivTable>
       <DivKeyBoardS>
         <Keyboard

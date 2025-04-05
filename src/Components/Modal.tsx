@@ -18,8 +18,8 @@ const Modal = (props: ModalPropsT) => {
     <ModalContainerS>
       <ModalContentS>
         <TitleS win={props.win}>
-          {props.win ? "Congratulations" : ""}
-          {props.lost ? "Sorry, Try Again !" : ""}
+          {props.win === true ? "Congratulations" : ""}
+          {props.lost === true ? "Sorry, Try Again !" : ""}
         </TitleS>
         <ButtonS onClick={props.handleClose}>Play again</ButtonS>
       </ModalContentS>
