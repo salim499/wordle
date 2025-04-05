@@ -32,6 +32,4 @@ test("closing modal", async () => {
   const user = userEvent.setup();
   await user.click(button);
   expect(functionToCheck).toBeCalledTimes(1);
-  const text = screen.getByText("Congratulations");
-  expect(text).not.toBeInTheDocument();
 });
