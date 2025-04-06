@@ -45,7 +45,7 @@ const App = (props: AppPropsT) => {
     // Enable and focus the first input field
     ref.current[0][0].disabled = false;
     ref.current[0][0].focus();
-  }, []);
+  }, [props.word]);
 
   // Function to restart the game
   const handleClose = () => {
