@@ -15,7 +15,7 @@ function Table(props: TableT) {
             <InputS
               key={rowIndex + colIndex}
               type="text"
-              readOnly={false}
+              readOnly={true}
               maxLength={1}
               ref={(el) => {
                 if (el) {
